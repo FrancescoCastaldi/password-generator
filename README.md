@@ -1,5 +1,12 @@
 # 🔐 Password Generator
 
+[![CI](https://github.com/FrancescoCastaldi/password-generator/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/FrancescoCastaldi/password-generator/actions/workflows/ci.yml)
+[![Python](https://img.shields.io/badge/python-3.10%2B-blue?logo=python&logoColor=white)](https://www.python.org/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Windows-lightgrey?logo=apple)]()
+[![Security: CSPRNG](https://img.shields.io/badge/security-CSPRNG-critical?logo=lock)]()
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+
 A lightweight, cross-platform desktop application to generate cryptographically secure passwords using common algorithms.
 
 ## Features
@@ -14,11 +21,14 @@ A lightweight, cross-platform desktop application to generate cryptographically 
 
 ```
 password-generator/
+├── .github/
+│   └── workflows/
+│       └── ci.yml
 ├── src/
 │   ├── __init__.py
-│   ├── app.py            # Main UI entrypoint
-│   ├── generator.py      # Password generation logic
-│   └── utils.py          # Clipboard and helper utilities
+│   ├── app.py
+│   ├── generator.py
+│   └── utils.py
 ├── tests/
 │   ├── __init__.py
 │   └── test_generator.py
@@ -30,7 +40,7 @@ password-generator/
 
 ## Requirements
 
-- Python 3.9+
+- Python 3.10+
 - No external dependencies (only stdlib + `pyperclip` for clipboard)
 
 ## Installation & Run
@@ -46,9 +56,10 @@ pip install -r requirements.txt
 python3 src/app.py
 ```
 
-> **Note (macOS):** If Tkinter is missing, install it via Homebrew:
+> **Note (macOS):** If Tkinter is missing:
 > ```bash
-> brew install python-tk
+> brew install tcl-tk
+> brew install python-tk@3.11
 > ```
 
 ### Windows
@@ -62,7 +73,7 @@ pip install -r requirements.txt
 python src/app.py
 ```
 
-> **Note (Windows):** Tkinter is bundled with the official Python installer from [python.org](https://www.python.org/downloads/). If missing, reinstall Python and check "tcl/tk and IDLE" during setup.
+> **Note (Windows):** Tkinter is bundled with the official Python installer from [python.org](https://www.python.org/downloads/). Reinstall Python and check **"tcl/tk and IDLE"** if missing.
 
 ## Running Tests
 
@@ -75,7 +86,7 @@ python -m pytest tests/ -v
 | Algorithm | Source | Notes |
 |---|---|---|
 | `secrets.token_hex` | Python stdlib | CSPRNG, recommended for security |
-| `os.urandom` | OS-level entropy | Direct OS CSPRNG |
+| `os.urandom + sha256` | OS-level entropy | Direct OS CSPRNG + SHA-256 hash |
 | `UUID4` | Python stdlib | Random UUID, 122 bits of entropy |
 
 ## License
